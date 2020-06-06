@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org ">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Список заказов на подлодки</title>
+</head>
+<body>
+<p>Список заказов на подлодки:</p>
+<div th:each="submarine,index: ${submarineList.getListSubmarine()}">
+  <form method="get" action="/patchSub">
+    <p
+        th:text="'Подлодка ' + ${submarine.name} + '; Стоимость: ' + ${submarine.getTotalCost()} + '; Статус заказа: ' + ${submarine.getStatus()}"></p>
+    <input type="text" name="index" th:value="${index.index}" hidden="hidden">
+    <input type="submit" value="Редактировать">
+  </form>
+</div>
+<p th:text="'Всего заказов: ' + ${submarineList.getCount()}"></p>
+<br>
+<div>Добавить новую лодку в список.</div>
+<form name="test" method="get" action="/add">
+  <p>Название лодки</p><input type="text" name="name">
+  <input type="submit" value="Добавить">
+</form>
+
+</body>
+</html>
